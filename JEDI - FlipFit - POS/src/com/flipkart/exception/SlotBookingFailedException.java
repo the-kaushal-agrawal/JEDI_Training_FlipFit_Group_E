@@ -1,6 +1,6 @@
 package com.flipkart.exception;
 
-import static com.flipkart.constants.ColorConstants.*;
+
 
 /**
  * Custom exception class for handling slot booking failure scenarios.
@@ -20,7 +20,7 @@ public class SlotBookingFailedException extends Exception {
     @Override
     public String getMessage() {
         // Returns a custom error message with color formatting when this exception is thrown
-        return ANSI_CYAN + "Unable to book slot. Please try again" + ANSI_RESET;
+        return   "Unable to book slot. Please try again"  ;
     }
 }
 

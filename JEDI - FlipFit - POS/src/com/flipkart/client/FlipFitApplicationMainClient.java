@@ -2,7 +2,6 @@ package com.flipkart.client;
 
 import java.util.Scanner;
 
-import static com.flipkart.constants.ColorConstants.*;
 import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 import com.flipkart.validator.*;
@@ -35,37 +34,35 @@ public class FlipFitApplicationMainClient {
     /// @param args Command line arguments (not used)
 
     public static void main(String[] args) {
-        System.out.println(ANSI_BOLD + ANSI_CYAN + "-----------------------------------------------------------------------------------");
-        System.out.println("-----------------------Welcome to FlipFit--------------------");
-        System.out.println("-----------------------------------------------------------------------------------" + ANSI_RESET);
+         System.out.println("-----------------------Welcome to FlipFit--------------------");
 
         boolean inInApp = true;
 
         while (inInApp) {
-            System.out.println(ANSI_BLUE + "Press 1 for Login");
+            System.out.println( "Press 1 for Login");
             System.out.println("Press 2 for Registration");
             System.out.println("Press 3 for Update Password");
-            System.out.println("Press 4 for Exit" + ANSI_RESET);
+            System.out.println("Press 4 for Exit" );
             int optionSelected = Integer.parseInt(scanner.nextLine());
 
             switch (optionSelected) {
                 case 1:
-                    System.out.println(ANSI_BOLD + ANSI_GREEN + "------------Login Page--------------" + ANSI_RESET);
-                    System.out.println(ANSI_GREEN + "Select your role:" + ANSI_RESET);
+                    System.out.println("------------Login Page--------------" );
+                    System.out.println( "Select your role:" );
                     System.out.println("Press 1 for admin");
                     System.out.println("Press 2 for gym owner");
                     System.out.println("Press 3 for gym customer");
                     int role = Integer.parseInt(scanner.nextLine());
 
                     if (role > 3 || role < 1) {
-                        System.out.println(ANSI_RED + "You have selected an invalid option. Please select a valid option" + ANSI_RESET);
+                        System.out.println( "You have selected an invalid option."  );
                         break;
                     }
 
                     System.out.println("Please enter your email:");
                     String userMail = scanner.nextLine();
                     if(!validateCredential.validateEmail(userMail)){
-                        System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+                        System.out.println( "Invalid Email address! Try Again!" );
                         break;
                     }
                     System.out.println("Please enter your password:");
@@ -74,15 +71,15 @@ public class FlipFitApplicationMainClient {
                     switch (role) {
                         case 1:
                             if (!adminMenu.verifyAdminCredentials(userMail, password)) {
-                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials to login" + ANSI_RESET);
+                                System.out.println( "Invalid credentials! Please enter valid credentials to login" );
                                 break;
                             }
-                            System.out.println(ANSI_CYAN + "Login successful! (Admin)" + ANSI_RESET);
+                            System.out.println( "Login successful! (Admin)" );
                             displayCurrentDate();
                             boolean isLoggedIn = true;
 
                             while (isLoggedIn) {
-                                System.out.println(ANSI_BOLD + ANSI_GREEN + "-----------------Admin Menu------------------" + ANSI_RESET);
+                                System.out.println(  "-----------------Admin Menu------------------" );
                                 System.out.println("Press 1 to view users");
                                 System.out.println("Press 2 to view gyms");
                                 System.out.println("Press 3 to view gym owners");
@@ -111,7 +108,7 @@ public class FlipFitApplicationMainClient {
                                         if (adminMenu.verifyGym(gymId))
                                             System.out.println("Gym verified successfully!");
                                         else
-                                            System.out.println(ANSI_RED + "Gym with given Id does not exists." + ANSI_RESET);
+                                            System.out.println( "Gym with given Id does not exists." );
                                         break;
                                     case 5:
                                         adminMenu.viewUnverifiedGymOwners();
@@ -120,7 +117,7 @@ public class FlipFitApplicationMainClient {
                                         if (adminMenu.verifyGymOwner(gymOwnerId))
                                             System.out.println("Gym owner verified successfully!");
                                         else
-                                            System.out.println(ANSI_RED + "Gym owner with given ID does not exists." + ANSI_RESET);
+                                            System.out.println( "Gym owner with given ID does not exists." );
                                         break;
                                     case 6:
                                         adminMenu.viewUnverifiedGyms();
@@ -137,23 +134,23 @@ public class FlipFitApplicationMainClient {
                             break;
                         case 2:
                             if (!gymOwnerMenu.gymOwnerLogin(userMail, password)) {
-                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials to login" + ANSI_RESET);
+                                System.out.println( "Invalid credentials! Please enter valid credentials to login" );
                                 break;
                             }
                             break;
                         case 3:
                             if (!customerMenu.userLogin(userMail, password)) {
-                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials to login" + ANSI_RESET);
+                                System.out.println( "Invalid credentials! Please enter valid credentials to login" );
                                 break;
                             }
                             break;
                         default:
-                            System.out.println(ANSI_RED + "You have selected an invalid option. Please select a valid option" + ANSI_RESET);
+                            System.out.println( "You have selected an invalid option. Please select a valid option" );
                             break;
                     }
                     break;
                 case 2:
-                    System.out.println(ANSI_BOLD + ANSI_GREEN + "-------------Registration Page--------------" + ANSI_RESET);
+                    System.out.println(  "-------------Registration Page--------------" );
                     System.out.println("Select your choice:");
                     System.out.println("Press 1 for gym user");
                     System.out.println("Press 2 for gym owner");
@@ -172,7 +169,7 @@ public class FlipFitApplicationMainClient {
                     }
                     break;
                 case 3:
-                    System.out.println(ANSI_BOLD + ANSI_GREEN + "-------------Reset Password Page--------------" + ANSI_RESET);
+                    System.out.println(  "-------------Reset Password Page--------------" );
                     System.out.println("Select your role:");
                     System.out.println("Press 1 for gym user");
                     System.out.println("Press 2 for gym owner");
@@ -181,7 +178,7 @@ public class FlipFitApplicationMainClient {
                     System.out.println("Please enter your email:");
                     userMail = scanner.nextLine();
                     if(!validateCredential.validateEmail(userMail)){
-                        System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+                        System.out.println( "Invalid Email address! Try Again!" );
                         break;
                     }
                     System.out.println("Please enter your current password:");
@@ -189,43 +186,43 @@ public class FlipFitApplicationMainClient {
                     System.out.println("Please enter new password:");
                     String updatedPassword = scanner.nextLine();
                     if(!validateCredential.validatePassword(updatedPassword)){
-                        System.out.println(ANSI_RED + "Password length should be in between 10 to 20" + ANSI_RESET);
-                        System.out.println(ANSI_RED + "It must also contain a number, lowercase, uppercase and special character." + ANSI_RESET);
+                        System.out.println( "Password length should be in between 10 to 20" );
+                        System.out.println( "It must also contain a number, lowercase, uppercase and special character." );
                         break;
                     }
 
                     switch (role) {
                         case 1:
                             if (!customerMenu.validateUser(userMail, password)) {
-                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials" + ANSI_RESET);
+                                System.out.println( "Invalid credentials! Please enter valid credentials" );
                             } else {
                                 if (customerMenu.updatePassword(userMail, password, updatedPassword))
-                                    System.out.println(ANSI_CYAN + "Password updated successfully!" + ANSI_RESET);
+                                    System.out.println( "Password updated successfully!" );
                                 else
-                                    System.out.println(ANSI_RED + "Password doesn't match!" + ANSI_RESET);
+                                    System.out.println( "Password doesn't match!" );
                             }
                             break;
                         case 2:
                             if (!gymOwnerMenu.verifyGymOwner(userMail, password)) {
-                                System.out.println(ANSI_RED + "Invalid credentials! Please enter valid credentials" + ANSI_RESET);
+                                System.out.println( "Invalid credentials! Please enter valid credentials" );
                             } else {
                                 if (gymOwnerMenu.updatePassword(userMail, password, updatedPassword))
-                                    System.out.println(ANSI_CYAN + "Password updated successfully!" + ANSI_RESET);
+                                    System.out.println( "Password updated successfully!" );
                                 else
-                                    System.out.println(ANSI_RED + "Password doesn't match!" + ANSI_RESET);
+                                    System.out.println( "Password doesn't match!" );
                             }
                             break;
                         case 3:
-                            System.out.println(ANSI_RED + "Sorry! You don't have enough rights to do that." + ANSI_RESET);
+                            System.out.println( "Sorry! You don't have enough rights to do that." );
                             break;
                     }
                     break;
                 case 4:
                     inInApp = false;
-                    System.out.println(ANSI_PURPLE + "Thank you for using FLipFit!" + ANSI_RESET);
+                    System.out.println("Thank you for using FLipFit!" );
                     break;
                 default:
-                    System.out.println(ANSI_RED + "!!! Enter a valid option !!!" + ANSI_RESET);
+                    System.out.println( "Enter a valid option" );
                     break;
             }
         }

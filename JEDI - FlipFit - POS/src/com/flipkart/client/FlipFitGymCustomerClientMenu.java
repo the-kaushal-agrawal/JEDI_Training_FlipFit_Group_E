@@ -7,7 +7,7 @@ import com.flipkart.business.PaymentsServiceOperations;
 import com.flipkart.business.UserServiceOperations;
 import com.flipkart.validator.*;
 
-import static com.flipkart.constants.ColorConstants.*;
+ 
 import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 import java.util.Scanner;
@@ -58,10 +58,10 @@ public class FlipFitGymCustomerClientMenu {
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
             boolean isLoggedIn = true;
-            System.out.println(ANSI_BOLD + "Customer Login Successful!!" + ANSI_RESET);
+            System.out.println( "Customer Login Successful!!" );
             displayCurrentDate();
             while (isLoggedIn) {
-                System.out.println(ANSI_YELLOW + "-------------CUSTOMER MENU-------------");
+                System.out.println( "-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
                 System.out.println("Press 2 to book slot");
                 System.out.println("Press 3 to cancel slot");
@@ -69,7 +69,7 @@ public class FlipFitGymCustomerClientMenu {
                 System.out.println("Press 5 to view all gyms by area");
                 System.out.println("Press 6 to view a slot's availability");
                 System.out.println("Press 7 to update your details");
-                System.out.println("Press 8 to logout" + ANSI_RESET);
+                System.out.println("Press 8 to logout" );
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
@@ -82,19 +82,19 @@ public class FlipFitGymCustomerClientMenu {
                         if (gyms2.isEmpty()) {
                             break;
                         }
-                        System.out.println(ANSI_BOLD + ANSI_RED + "Enter the following: " + ANSI_RESET);
-                        System.out.println(ANSI_CYAN + "Gym ID: " + ANSI_RESET);
+                        System.out.println(  "Enter the following: " );
+                        System.out.println( "Gym ID: " );
                         int gymId = Integer.parseInt(scanner.nextLine());
                         if (!validateIdentity.validateId(gymId)) {
-                            System.out.println(ANSI_RED + "Gym ID invalid!" + ANSI_RESET);
+                            System.out.println( "Gym ID invalid!" );
                             break;
                         }
-                        System.out.println(ANSI_GREEN + "Slot Time: " + ANSI_RESET);
+                        System.out.println( "Slot Time: " );
                         int time = Integer.parseInt(scanner.nextLine());
                         if (processPayments()) {
                             System.out.println("Payment was successful");
                             if (bookSlot(gymId, time, email)) {
-                                System.out.println(ANSI_CYAN + "Slot booked successfully!" + ANSI_RESET);
+                                System.out.println( "Slot booked successfully!" );
                             }
                         } else {
                             System.out.println("Payment failed. Please try again");
@@ -104,53 +104,53 @@ public class FlipFitGymCustomerClientMenu {
                         if (!viewAllBookings(email)) {
                             break;
                         }
-                        System.out.println(ANSI_RED + "Enter Booking ID: " + ANSI_RESET);
+                        System.out.println( "Enter Booking ID: " );
                         int bookingId = Integer.parseInt(scanner.nextLine());
                         if (!validateIdentity.validateId(bookingId)) {
-                            System.out.println(ANSI_RED + "Booking ID invalid!" + ANSI_RESET);
+                            System.out.println( "Booking ID invalid!" );
                             break;
                         }
                         if (cancelSlot(bookingId))
-                            System.out.println(ANSI_CYAN + "Booking cancelled successfully!" + ANSI_RESET);
+                            System.out.println( "Booking cancelled successfully!" );
                         else
-                            System.out.println(ANSI_CYAN + "Booking cancellation failed." + ANSI_RESET);
+                            System.out.println( "Booking cancellation failed." );
                         break;
                     case 4:
                         viewAllBookings(email);
                         break;
                     case 5:
-                        System.out.println(ANSI_RED + "Enter location you want find gyms in: " + ANSI_RESET);
+                        System.out.println( "Enter location you want find gyms in: " );
                         String location = scanner.nextLine();
                         List<Gym> gyms3 = viewAllGymsByArea(location);
                         printGyms(gyms3);
                         break;
                     case 6:
-                        System.out.println(ANSI_RED + "Enter gym ID: " + ANSI_RESET);
+                        System.out.println( "Enter gym ID: " );
                         int _gymId = Integer.parseInt(scanner.nextLine());
                         if (!validateIdentity.validateId(_gymId)) {
-                            System.out.println(ANSI_RED + "Gym ID invalid!" + ANSI_RESET);
+                            System.out.println( "Gym ID invalid!" );
                             break;
                         }
-                        System.out.println(ANSI_RED + "Enter start time: " + ANSI_RESET);
+                        System.out.println( "Enter start time: " );
                         int _startTime = Integer.parseInt(scanner.nextLine());
                         int availableSeatCount = userServiceOperations.getSeatCount(_gymId, _startTime);
                         if (availableSeatCount == -1) {
-                            System.out.println("Seat count is not available. Please try again." + ANSI_RESET);
+                            System.out.println("Seat count is not available. Please try again." );
                             break;
                         }
-                        System.out.println(ANSI_GREEN + "Available seat count: " + availableSeatCount + ANSI_RESET);
+                        System.out.println( "Available seat count: " + availableSeatCount );
                         break;
                     case 7:
                         if (updateUserDetails())
-                            System.out.println(ANSI_RED + "User updated successfully!" + ANSI_RESET);
+                            System.out.println( "User updated successfully!" );
                         else
-                            System.out.println(ANSI_RED + "User update was unsuccessful" + ANSI_RESET);
+                            System.out.println( "User update was unsuccessful" );
                         break;
                     case 8:
                         isLoggedIn = false;
                         break;
                     default:
-                        System.out.println(ANSI_BOLD + ANSI_RED + "Wrong choice!" + ANSI_RESET);
+                        System.out.println(  "Wrong choice!" );
                 }
             }
         } else {
@@ -215,13 +215,13 @@ public class FlipFitGymCustomerClientMenu {
         System.out.print("Enter card number: ");
         String cardNumber = scanner.nextLine();
         if (!validateCard.validateCardNumber(cardNumber)) {
-            System.out.println(ANSI_RED + "Card number invalid!" + ANSI_RESET);
+            System.out.println( "Card number invalid!" );
             return false;
         }
         System.out.print("Enter expiry date (MM/YY): ");
         String expiryDate = scanner.nextLine();
         if (!validateCard.validateExpiryDate(expiryDate)) {
-            System.out.println(ANSI_RED + "Expiry Date invalid!" + ANSI_RESET);
+            System.out.println( "Expiry Date invalid!" );
             return false;
         }
 
@@ -231,7 +231,7 @@ public class FlipFitGymCustomerClientMenu {
         System.out.print("Enter CVV: ");
         String cvv = scanner.nextLine();
         if (!validateCard.validateCVV(cvv)) {
-            System.out.println(ANSI_RED + "CVV invalid!" + ANSI_RESET);
+            System.out.println( "CVV invalid!" );
             return false;
         }
 
@@ -288,7 +288,7 @@ public class FlipFitGymCustomerClientMenu {
     ///
     /// @param email User's email address.
     public boolean viewAllBookings(String email) {
-        System.out.println(ANSI_BOLD + ANSI_RED + "My Bookings: " + ANSI_RESET);
+        System.out.println(  "My Bookings: " );
         int userId = userServiceOperations.getUserIdByEmail(email);
         if (userId == -1) {
             System.out.println("No such user exists with email: " + email);
@@ -322,45 +322,45 @@ public class FlipFitGymCustomerClientMenu {
 
     /// Creates a new customer account.
     public void createCustomer() {
-        System.out.println(ANSI_BLUE + "Enter customer details: " + ANSI_RESET);
+        System.out.println( "Enter customer details: " );
 //        Name
-        System.out.println(ANSI_BLUE + "Name: " + ANSI_RESET);
+        System.out.println( "Name: " );
         String ownerName = scanner.nextLine();
 //        Mobile Number
-        System.out.println(ANSI_BLUE + "Phone Number: " + ANSI_RESET);
+        System.out.println( "Phone Number: " );
         String phoneNo = scanner.nextLine();
         if (!validateIdentity.validatePhoneNumber(phoneNo)) {
-            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Phone Number invalid! Try again!" );
             return;
         }
 //        Address
-        System.out.println(ANSI_BLUE + "Address: " + ANSI_RESET);
+        System.out.println( "Address: " );
         String address = scanner.nextLine();
         if (!validateIdentity.validateAddress(address)) {
-            System.out.println(ANSI_RED + "Address invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Address invalid! Try again!" );
             return;
         }
 
 //        Location
-        System.out.println(ANSI_BLUE + "Location: " + ANSI_RESET);
+        System.out.println( "Location: " );
         String location = scanner.nextLine();
         if (!validateIdentity.validateLocation(location)) {
-            System.out.println(ANSI_RED + "Location invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Location invalid! Try again!" );
             return;
         }
 //        Email
         System.out.println("Email: ");
         String ownerEmail = scanner.nextLine();
         if (!validateCredential.validateEmail(ownerEmail)) {
-            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            System.out.println( "Invalid Email address! Try Again!" );
             return;
         }
 //        Password
-        System.out.println(ANSI_BLUE + "Password: " + ANSI_RESET);
+        System.out.println( "Password: " );
         String password = scanner.nextLine();
         if (!validateCredential.validatePassword(password)) {
-            System.out.println(ANSI_RED + "Password length should be in between 10 to 20" + ANSI_RESET);
-            System.out.println(ANSI_RED + "It must also contain a number, lowercase, uppercase and special character." + ANSI_RESET);
+            System.out.println( "Password length should be in between 10 to 20" );
+            System.out.println( "It must also contain a number, lowercase, uppercase and special character." );
             return;
         }
 
@@ -388,19 +388,19 @@ public class FlipFitGymCustomerClientMenu {
     ///
     /// @return true if user details are updated successfully, false otherwise.
     public boolean updateUserDetails() {
-        System.out.println(ANSI_PURPLE + "Enter customer details: " + ANSI_RESET);
-        System.out.println(ANSI_PURPLE + "Email: " + ANSI_RESET);
+        System.out.println( "Enter customer details: " );
+        System.out.println( "Email: " );
         String ownerEmail = scanner.nextLine();
         if (!validateCredential.validateEmail(ownerEmail)) {
-            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            System.out.println( "Invalid Email address! Try Again!" );
             return false;
         }
-        System.out.println(ANSI_PURPLE + "Name: " + ANSI_RESET);
+        System.out.println( "Name: " );
         String ownerName = scanner.nextLine();
-        System.out.println(ANSI_PURPLE + "Phone Number: " + ANSI_RESET);
+        System.out.println( "Phone Number: " );
         String phoneNo = scanner.nextLine();
         if (!validateIdentity.validatePhoneNumber(phoneNo)) {
-            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Phone Number invalid! Try again!" );
             return false;
         }
 

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.flipkart.constants.ColorConstants.*;
 import static com.flipkart.utils.DateAndTime.displayCurrentDate;
 
 public class FlipFitGymOwnerClientMenu {
@@ -36,17 +35,17 @@ public class FlipFitGymOwnerClientMenu {
         if (!verifyGymOwner(email, password)) {
             return false;
         }
-        System.out.println(ANSI_BOLD + "Login Successful! (Gym Owner)" + ANSI_RESET);
+        System.out.println( "Login Successful! (Gym Owner)" );
         displayCurrentDate();
         while (true) {
-            System.out.println(ANSI_BOLD + ANSI_PURPLE + "-----------------Gym Owner Menu-----------------" + ANSI_RESET);
-            System.out.println(ANSI_PURPLE + "Press 1 to add a gym");
+            System.out.println(  "-----------------Gym Owner Menu-----------------" );
+            System.out.println( "Press 1 to add a gym");
             System.out.println("Press 2 to update gym details");
             System.out.println("Press 3 to view all gyms");
             System.out.println("Press 4 to add slots");
             System.out.println("Press 5 to update seat count by");
             System.out.println("Press 6 to update your details");
-            System.out.println("Press 7 to logout" + ANSI_RESET);
+            System.out.println("Press 7 to logout" );
 
             int choice = Integer.parseInt(scanner.nextLine());
 
@@ -68,14 +67,14 @@ public class FlipFitGymOwnerClientMenu {
                     break;
                 case 6:
                     if (updateGymOwnerDetails())
-                        System.out.println(ANSI_BLUE + "Gym owner updated successfully!" + ANSI_RESET);
+                        System.out.println( "Gym owner updated successfully!" );
                     else
-                        System.out.println(ANSI_BLUE + "Gym owner not updated" + ANSI_RESET);
+                        System.out.println( "Gym owner not updated" );
                     break;
                 case 7:
                     return true;
                 default:
-                    System.out.println(ANSI_BLUE + "Invalid option!" + ANSI_RESET);
+                    System.out.println( "Invalid option!" );
             }
         }
     }
@@ -91,19 +90,19 @@ public class FlipFitGymOwnerClientMenu {
         }
         gym.setOwnerId(gymOwnerId);
 
-        System.out.println(ANSI_BOLD + ANSI_YELLOW + "Enter details of the gym: " + ANSI_RESET);
-        System.out.println(ANSI_PURPLE + "Name: " + ANSI_RESET);
+        System.out.println(  "Enter details of the gym: " );
+        System.out.println( "Name: " );
         String gymName = scanner.nextLine();
-        System.out.println(ANSI_PURPLE + "Address: " + ANSI_RESET);
+        System.out.println( "Address: " );
         String address = scanner.nextLine();
         if (!validateIdentity.validateAddress(address)) {
-            System.out.println(ANSI_RED + "Invalid address!" + ANSI_RESET);
+            System.out.println( "Invalid address!" );
             return;
         }
-        System.out.println(ANSI_PURPLE + "Location: " + ANSI_RESET);
+        System.out.println( "Location: " );
         String location = scanner.nextLine();
         if (!validateIdentity.validateLocation(location)) {
-            System.out.println(ANSI_RED + "Invalid location!" + ANSI_RESET);
+            System.out.println( "Invalid location!" );
             return;
         }
         String gymStatus = "unverified";
@@ -114,10 +113,10 @@ public class FlipFitGymOwnerClientMenu {
         gym.setStatus(gymStatus);
 
         List<Slots> slots = new ArrayList<>();
-        System.out.println(ANSI_PURPLE + "Please enter number of slots: " + ANSI_RESET);
+        System.out.println( "Please enter number of slots: " );
         int slotCount = Integer.parseInt(scanner.nextLine());
         if (!validateIdentity.validateSlots(slotCount)) {
-            System.out.println(ANSI_RED + "Invalid number of slots!" + ANSI_RESET);
+            System.out.println( "Invalid number of slots!" );
             return;
         }
         int currentCount = 1;
@@ -126,13 +125,13 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println("Enter start time: ");
             int startTime = Integer.parseInt(scanner.nextLine());
             if (!validateIdentity.validateTime(startTime)) {
-                System.out.println(ANSI_RED + "Invalid start time!" + ANSI_RESET);
+                System.out.println( "Invalid start time!" );
                 continue;
             }
             System.out.println("Enter available seats: ");
             int seatCount = Integer.parseInt(scanner.nextLine());
             if (!validateIdentity.validateSlots(seatCount)) {
-                System.out.println(ANSI_RED + "Invalid seat count!" + ANSI_RESET);
+                System.out.println( "Invalid seat count!" );
                 continue;
             }
             Slots slot = new Slots(-1, startTime, seatCount);
@@ -142,23 +141,23 @@ public class FlipFitGymOwnerClientMenu {
 
         gym.setSlots(slots);
         if (gymOwnerServiceOperations.addGym(gym))
-            System.out.println(ANSI_PURPLE + "Gym added successfully!" + ANSI_RESET);
+            System.out.println( "Gym added successfully!" );
         else
-            System.out.println(ANSI_PURPLE + "Gym could not be added!" + ANSI_RESET);
+            System.out.println( "Gym could not be added!" );
     }
 
     private void addSlots() {
-        System.out.println(ANSI_CYAN + "Gym ID: " + ANSI_RESET);
+        System.out.println( "Gym ID: " );
         int gymId = Integer.parseInt(scanner.nextLine());
         if (!validateIdentity.validateId(gymId)) {
-            System.out.println(ANSI_RED + "Gym ID invalid!" + ANSI_RESET);
+            System.out.println( "Gym ID invalid!" );
             return;
         }
         List<Slots> slots = new ArrayList<>();
-        System.out.println(ANSI_PURPLE + "Please enter number of slots: " + ANSI_RESET);
+        System.out.println( "Please enter number of slots: " );
         int slotCount = Integer.parseInt(scanner.nextLine());
         if (!validateIdentity.validateSlots(slotCount)) {
-            System.out.println(ANSI_RED + "Invalid number of slots!" + ANSI_RESET);
+            System.out.println( "Invalid number of slots!" );
             return;
         }
         int currentCount = 1;
@@ -167,13 +166,13 @@ public class FlipFitGymOwnerClientMenu {
             System.out.println("Enter start time: ");
             int startTime = Integer.parseInt(scanner.nextLine());
             if (!validateIdentity.validateTime(startTime)) {
-                System.out.println(ANSI_RED + "Invalid start time!" + ANSI_RESET);
+                System.out.println( "Invalid start time!" );
                 continue;
             }
             System.out.println("Enter available seats: ");
             int seatCount = Integer.parseInt(scanner.nextLine());
             if (!validateIdentity.validateSlots(seatCount)) {
-                System.out.println(ANSI_RED + "Invalid seat count!" + ANSI_RESET);
+                System.out.println( "Invalid seat count!" );
                 continue;
             }
             Slots slot = new Slots(-1, startTime, seatCount);
@@ -181,62 +180,62 @@ public class FlipFitGymOwnerClientMenu {
             currentCount++;
         }
         if(gymOwnerServiceOperations.addSlots(gymId, slots))
-            System.out.println(ANSI_GREEN + "Gym added successfully!" + ANSI_RESET);
+            System.out.println( "Gym added successfully!" );
         else
-            System.out.println(ANSI_RED + "Gym could not be added!" + ANSI_RESET);
+            System.out.println( "Gym could not be added!" );
     }
 
     /**
      * Handles the creation of a new gym owner account.
      */
     public void createGymOwner() {
-        System.out.println(ANSI_BOLD + ANSI_YELLOW + "Enter gym owner details:" + ANSI_RESET);
-        System.out.println(ANSI_YELLOW + "Email: " + ANSI_RESET);
+        System.out.println(  "Enter gym owner details:" );
+        System.out.println( "Email: " );
         String ownerEmail = scanner.nextLine();
         if (!validateCredential.validateEmail(ownerEmail)) {
-            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            System.out.println( "Invalid Email address! Try Again!" );
             return;
         }
-        System.out.println(ANSI_YELLOW + "Name: " + ANSI_RESET);
+        System.out.println( "Name: " );
         String ownerName = scanner.nextLine();
-        System.out.println(ANSI_YELLOW + "Password: " + ANSI_RESET);
+        System.out.println( "Password: " );
         String password = scanner.nextLine();
         if (!validateCredential.validatePassword(password)) {
-            System.out.println(ANSI_RED + "Password length should be between 10 to 20 characters and include numbers, lowercase, uppercase, and special characters." + ANSI_RESET);
+            System.out.println( "Password length should be between 10 to 20 characters and include numbers, lowercase, uppercase, and special characters." );
             return;
         }
-        System.out.println(ANSI_YELLOW + "Phone Number: " + ANSI_RESET);
+        System.out.println( "Phone Number: " );
         String phoneNo = scanner.nextLine();
         if (!validateIdentity.validatePhoneNumber(phoneNo)) {
-            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Phone Number invalid! Try again!" );
             return;
         }
-        System.out.println(ANSI_YELLOW + "National ID: " + ANSI_RESET);
+        System.out.println( "National ID: " );
         String nationalId = scanner.nextLine();
         if (!ValidateIdentity.validateAadhaar(nationalId)) {
-            System.out.println(ANSI_RED + "Aadhaar Card invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Aadhaar Card invalid! Try again!" );
             return;
         }
 
         if (nationalId.length() != 12) {
-            System.out.println(ANSI_YELLOW + "Invalid national ID! Length must be 12" + ANSI_RESET);
+            System.out.println( "Invalid national ID! Length must be 12" );
             return;
         }
 
-        System.out.println(ANSI_YELLOW + "GST: " + ANSI_RESET);
+        System.out.println( "GST: " );
         String GST = scanner.nextLine();
         if (!ValidateIdentity.GSTValidator.validateGST(GST)) {
-            System.out.println(ANSI_YELLOW + "Invalid GST number!" + ANSI_RESET);
+            System.out.println( "Invalid GST number!" );
             return;
         }
-        System.out.println(ANSI_YELLOW + "PAN Number: " + ANSI_RESET);
+        System.out.println( "PAN Number: " );
         String PAN = scanner.nextLine();
         if (!ValidateIdentity.PANCardValidator.validatePAN(PAN)) {
-            System.out.println(ANSI_RED + "PAN invalid! Try again!" + ANSI_RESET);
+            System.out.println( "PAN invalid! Try again!" );
             return;
         }
         if (PAN.length() != 10) {
-            System.out.println(ANSI_YELLOW + "Invalid PAN Card Number. Length must be 10" + ANSI_RESET);
+            System.out.println( "Invalid PAN Card Number. Length must be 10" );
             return;
         }
 
@@ -253,28 +252,28 @@ public class FlipFitGymOwnerClientMenu {
         gymOwner.setVerificationStatus("unverified");
 
         if (gymOwnerServiceOperations.createGymOwner(gymOwner)) {
-            System.out.println(ANSI_YELLOW + "Gym owner created!" + ANSI_RESET);
+            System.out.println( "Gym owner created!" );
         } else {
-            System.out.println(ANSI_YELLOW + "Gym owner not created!" + ANSI_RESET);
+            System.out.println( "Gym owner not created!" );
         }
     }
 
     /// Updates the details of an existing gym owner.
     /// @return true if the update is successful, false otherwise.
     private boolean updateGymOwnerDetails() {
-        System.out.println(ANSI_BLUE + ANSI_BOLD + "Enter gym owner details:" + ANSI_RESET);
-        System.out.println(ANSI_BLUE + "Email: " + ANSI_RESET);
+        System.out.println(  "Enter gym owner details:" );
+        System.out.println( "Email: " );
         String ownerEmail = scanner.nextLine();
         if (!validateCredential.validateEmail(ownerEmail)) {
-            System.out.println(ANSI_RED + "Invalid Email address! Try Again!" + ANSI_RESET);
+            System.out.println( "Invalid Email address! Try Again!" );
             return false;
         }
-        System.out.println(ANSI_BLUE + "Name: " + ANSI_RESET);
+        System.out.println( "Name: " );
         String ownerName = scanner.nextLine();
-        System.out.println(ANSI_BLUE + "Phone Number: " + ANSI_RESET);
+        System.out.println( "Phone Number: " );
         String phoneNo = scanner.nextLine();
         if (!validateIdentity.validatePhoneNumber(phoneNo)) {
-            System.out.println(ANSI_RED + "Phone Number invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Phone Number invalid! Try again!" );
             return false;
         }
 
@@ -337,19 +336,19 @@ public class FlipFitGymOwnerClientMenu {
      */
     private void updateSeatCount(String email) {
         displayGyms(email);
-        System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
+        System.out.println( "Enter gym ID: " );
         int gymId = Integer.parseInt(scanner.nextLine());
 
-        System.out.println(ANSI_BLUE + "Enter start time: " + ANSI_RESET);
+        System.out.println( "Enter start time: " );
         int startTime = Integer.parseInt(scanner.nextLine());
 
-        System.out.println(ANSI_BLUE + "Update seat count by: " + ANSI_RESET);
+        System.out.println( "Update seat count by: " );
         int seatCount = Integer.parseInt(scanner.nextLine());
 
         if (gymOwnerServiceOperations.updateSeatCount(gymId, startTime, seatCount))
-            System.out.println(ANSI_BLUE + "Seat count updated!" + ANSI_RESET);
+            System.out.println( "Seat count updated!" );
         else
-            System.out.println(ANSI_BLUE + "Seat count not updated" + ANSI_RESET);
+            System.out.println( "Seat count not updated" );
     }
 
     /**
@@ -360,22 +359,22 @@ public class FlipFitGymOwnerClientMenu {
     public boolean updateGym(String email) {
         displayGyms(email);
 
-        System.out.println(ANSI_BLUE + "Enter gym ID: " + ANSI_RESET);
+        System.out.println( "Enter gym ID: " );
         int gymId = Integer.parseInt(scanner.nextLine());
 
-        System.out.println(ANSI_PURPLE + "Enter gym details: " + ANSI_RESET);
-        System.out.println(ANSI_PURPLE + "Name: " + ANSI_RESET);
+        System.out.println( "Enter gym details: " );
+        System.out.println( "Name: " );
         String gymName = scanner.nextLine();
-        System.out.println(ANSI_PURPLE + "Gym Address: " + ANSI_RESET);
+        System.out.println( "Gym Address: " );
         String gymAddress = scanner.nextLine();
         if (!validateIdentity.validateAddress(gymAddress)) {
-            System.out.println(ANSI_RED + "Address invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Address invalid! Try again!" );
             return false;
         }
-        System.out.println(ANSI_PURPLE + "Gym Location: " + ANSI_RESET);
+        System.out.println( "Gym Location: " );
         String gymALocation = scanner.nextLine();
         if (!validateIdentity.validateLocation(gymALocation)) {
-            System.out.println(ANSI_RED + "Location invalid! Try again!" + ANSI_RESET);
+            System.out.println( "Location invalid! Try again!" );
             return false;
         }
 

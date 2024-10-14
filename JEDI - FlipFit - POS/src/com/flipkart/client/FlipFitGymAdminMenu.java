@@ -4,12 +4,11 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.business.AdminServiceOperations;
-import com.flipkart.constants.AdminCredentials;
+
 
 import java.util.List;
 
-import static com.flipkart.constants.ColorConstants.ANSI_CYAN;
-import static com.flipkart.constants.ColorConstants.ANSI_RESET;
+
 
 
 
@@ -19,11 +18,14 @@ public class FlipFitGymAdminMenu {
      * Service operations for admin tasks.
      */
     AdminServiceOperations adminServiceOperations = new AdminServiceOperations();
+    private static final String ADMIN_EMAIL  = "kaushal.agrawal@flipkart.com";
+    private static final String ADMIN_PASSWORD = "kaushal";
+
 
     /**
      * Credentials for admin login.
      */
-    AdminCredentials adminCredentials = new AdminCredentials();
+
 
     /// Displays a list of gyms.
     /// Calls the viewGyms method from AdminServiceOperations.
@@ -36,9 +38,9 @@ public class FlipFitGymAdminMenu {
         }
 
         String leftAlignFormat = "| %-6s | %-20s | %-40s | %-20s | %-10s | %-10s |%n";
-        System.out.format(ANSI_CYAN + "+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+        System.out.format(  "+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
         System.out.format("| Gym ID |     Name             | Address                                | Location             | Owner ID | Status   |%n");
-        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n" + ANSI_RESET);
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
 
         for (Gym gym : gyms) {
             System.out.format(leftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation(), gym.getOwnerId(), gym.getStatus());
@@ -58,9 +60,9 @@ public class FlipFitGymAdminMenu {
         }
 
         String leftAlignFormat = "| %-8s | %-20s | %-30s | %-15s | %-20s | %-40s |%n";
-        System.out.format(ANSI_CYAN + "+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
+        System.out.format(  "+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
         System.out.format("| User ID  |     Name             | Email                         | Phone Number  | Location           | Address                              |%n");
-        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n" + ANSI_RESET);
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n"  );
 
         for (User user : users) {
             System.out.format(leftAlignFormat, user.getUserId(), user.getUserName(), user.getEmail(), user.getPhoneNumber(), user.getLocation(), user.getAddress());
@@ -79,9 +81,9 @@ public class FlipFitGymAdminMenu {
         }
 
         String leftAlignFormat = "| %-13s | %-20s | %-30s | %-15s | %-10s | %-20s | %-20s | %-20s |%n";
-        System.out.format(ANSI_CYAN + "+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
+        System.out.format( "+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
         System.out.format("| Gym Owner ID  |     Name             | Email                         | Phone Number  | GST        | National ID          | Verification Status  | PAN                  |%n");
-        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n" + ANSI_RESET);
+        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n"  );
 
         for (GymOwner gymOwner : gymOwners) {
             System.out.format(leftAlignFormat, gymOwner.getOwnerId(), gymOwner.getOwnerName(), gymOwner.getOwnerEmail(), gymOwner.getPhoneNo(), gymOwner.getGST(), gymOwner.getNationalId(), gymOwner.getVerificationStatus(), gymOwner.getPAN());
@@ -117,9 +119,9 @@ public class FlipFitGymAdminMenu {
         }
 
         String leftAlignFormat = "| %-5d | %-20s | %-5d | %-40s | %-20s | %-15s |%n";
-        System.out.format(ANSI_CYAN + "+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n");
+        System.out.format(  "+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n");
         System.out.format("| S.No  |     Name             | Gym ID |           Address                        |   Location           |     Status       |%n");
-        System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n" + ANSI_RESET);
+        System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n"  );
 
         int gymCounter = 1;
         for (Gym g : gyms) {
@@ -140,9 +142,9 @@ public class FlipFitGymAdminMenu {
         }
 
         String leftAlignFormat = "| %-5d | %-10d | %-20s | %-20s | %-15s |%n";
-        System.out.format(ANSI_CYAN + "+-------+----------+----------------------+----------------------+------------------+%n");
+        System.out.format(  "+-------+----------+----------------------+----------------------+------------------+%n");
         System.out.format("| S.No  | Owner ID |     Owner Name       |     Email            |     Status       |%n");
-        System.out.format("+-------+----------+----------------------+----------------------+------------------+%n" + ANSI_RESET);
+        System.out.format("+-------+----------+----------------------+----------------------+------------------+%n"  );
 
         int gymOwnerCounter = 1;
         for (GymOwner gymOwner : gymOwnerList) {
@@ -159,7 +161,7 @@ public class FlipFitGymAdminMenu {
     /// @return true if credentials match the predefined admin credentials, false otherwise.
     public boolean verifyAdminCredentials(String userMail, String password) {
         try {
-            return userMail.equals(AdminCredentials.ADMIN_EMAIL) && password.equals(AdminCredentials.ADMIN_PASSWORD);
+            return userMail.equals(ADMIN_EMAIL) && password.equals(ADMIN_PASSWORD);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
