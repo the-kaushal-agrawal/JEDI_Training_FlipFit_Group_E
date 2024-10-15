@@ -1,9 +1,11 @@
 package com.flipfit.client;
 
+import com.flipfit.bean.FlipFitRoles;
 import com.flipfit.validator.ValidateCredential;
 
 import java.util.Scanner;
 
+import static com.flipfit.bean.FlipFitRoles.*;
 import static com.flipfit.utils.DateAndTime.displayCurrentDate;
 
 public class FlipFitApplicationMainClient {
@@ -48,14 +50,14 @@ public class FlipFitApplicationMainClient {
             switch (optionSelected) {
                 case 1:
                     System.out.println("!!Login Page!!");
-                    System.out.println("Select your role:");
-                    System.out.println("Press 1 for admin");
-                    System.out.println("Press 2 for gym owner");
-                    System.out.println("Press 3 for gym customer");
-                    int role = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Type your role (CUSTOMER, ADMIN, GYM_OWNER)");
 
-                    if (role > 3 || role < 1) {
-                        System.out.println("You have selected an invalid option.");
+
+                    FlipFitRoles role = FlipFitRoles.valueOf(scanner.nextLine());
+
+
+                    if (role != ADMIN && role !=  GYM_OWNER && role != CUSTOMER) {
+                        System.out.println("You have typed an invalid option.");
                         break;
                     }
 
@@ -69,7 +71,7 @@ public class FlipFitApplicationMainClient {
                     String password = scanner.nextLine();
 
                     switch (role) {
-                        case 1:
+                        case ADMIN:
                             if (!adminMenu.verifyAdminCredentials(userMail, password)) {
                                 System.out.println("Invalid credentials! Please enter valid credentials to login");
                                 break;
@@ -80,6 +82,7 @@ public class FlipFitApplicationMainClient {
 
                             while (isLoggedIn) {
                                 System.out.println("-----------------FlipFitAdmin Menu------------------");
+                                System.out.println(" ");
                                 System.out.println("Press 1 to view users");
                                 System.out.println("Press 2 to view gyms");
                                 System.out.println("Press 3 to view gym owners");
@@ -132,13 +135,13 @@ public class FlipFitApplicationMainClient {
                                 if (!isLoggedIn) break;
                             }
                             break;
-                        case 2:
+                        case GYM_OWNER:
                             if (!gymOwnerMenu.gymOwnerLogin(userMail, password)) {
                                 System.out.println("Invalid credentials! Please enter valid credentials to login");
                                 break;
                             }
                             break;
-                        case 3:
+                        case CUSTOMER:
                             if (!customerMenu.userLogin(userMail, password)) {
                                 System.out.println("Invalid credentials! Please enter valid credentials to login");
                                 break;
@@ -151,17 +154,15 @@ public class FlipFitApplicationMainClient {
                     break;
                 case 2:
                     System.out.println("-------------Registration Page--------------");
-                    System.out.println("Select your choice:");
-                    System.out.println("Press 1 for gym user");
-                    System.out.println("Press 2 for gym owner");
-                    System.out.println("Press 3 to go back");
-                    role = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Type your role (CUSTOMER, GYM_OWNER)");
+
+                    role = FlipFitRoles.valueOf(scanner.nextLine());
 
                     switch (role) {
-                        case 1:
+                        case CUSTOMER:
                             customerMenu.createCustomer();
                             break;
-                        case 2:
+                        case GYM_OWNER:
                             gymOwnerMenu.createGymOwner();
                             break;
                         default:
@@ -170,11 +171,10 @@ public class FlipFitApplicationMainClient {
                     break;
                 case 3:
                     System.out.println("-------------Reset Password Page--------------");
-                    System.out.println("Select your role:");
-                    System.out.println("Press 1 for gym user");
-                    System.out.println("Press 2 for gym owner");
-                    System.out.println("Press 3 for gym admin");
-                    role = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Type your role (CUSTOMER, GYM_OWNER, ADMIN)");
+
+
+                    role = FlipFitRoles.valueOf(scanner.nextLine());
                     System.out.println("Please enter your email:");
                     userMail = scanner.nextLine();
                     if (!validateCredential.validateEmail(userMail)) {
@@ -192,7 +192,7 @@ public class FlipFitApplicationMainClient {
                     }
 
                     switch (role) {
-                        case 1:
+                        case CUSTOMER:
                             if (!customerMenu.validateUser(userMail, password)) {
                                 System.out.println("Invalid credentials! Please enter valid credentials");
                             } else {
@@ -202,7 +202,7 @@ public class FlipFitApplicationMainClient {
                                     System.out.println("Password doesn't match!");
                             }
                             break;
-                        case 2:
+                        case GYM_OWNER:
                             if (!gymOwnerMenu.verifyGymOwner(userMail, password)) {
                                 System.out.println("Invalid credentials! Please enter valid credentials");
                             } else {
@@ -212,7 +212,7 @@ public class FlipFitApplicationMainClient {
                                     System.out.println("Password doesn't match!");
                             }
                             break;
-                        case 3:
+                        case ADMIN:
                             System.out.println("Sorry! You don't have enough rights to do that.");
                             break;
                     }

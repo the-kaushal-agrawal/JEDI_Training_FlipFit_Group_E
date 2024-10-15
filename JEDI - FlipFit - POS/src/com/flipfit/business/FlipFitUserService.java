@@ -107,37 +107,3 @@ public interface FlipFitUserService {
     int getSeatCount(int gymId, int startTime);
 }
 
-
-//package com.flipfit.business;
-//
-//import com.flipfit.bean.FlipFitBookings;
-//import com.flipfit.bean.FlipFitGym;
-//import com.flipfit.bean.FlipFitUser;
-//
-//import java.util.List;
-//
-//public interface FlipFitUserService {
-//
-//    boolean cancelSlot(int bookingId);
-//
-//    List<FlipFitBookings> viewAllBookings(int userId);
-//
-//    List<FlipFitGym> viewAllGymsWithSlots();
-//
-//    List<FlipFitGym> viewAllGymsByArea(String area);
-//
-//    boolean bookSlot(int gymId, int startTime, String email);
-//
-//    boolean validateUser(String email, String password); // using email instead of username
-//
-//    boolean createUser(FlipFitUser user);
-//
-//    boolean updateGymUserPassword(String email, String password, String updatedPassword);
-//
-//    boolean updateUserDetails(FlipFitUser user);
-//
-//    int getUserIdByEmail(String email);
-//
-//    int getSeatCount(int gymId, int startTime);
-//}
-

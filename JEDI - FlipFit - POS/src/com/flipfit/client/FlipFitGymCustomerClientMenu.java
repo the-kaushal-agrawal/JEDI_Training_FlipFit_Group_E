@@ -23,6 +23,7 @@ public class FlipFitGymCustomerClientMenu {
      */
     Scanner scanner = new Scanner(System.in);
 
+
     /**
      * Service operations for user-related tasks.
      */
@@ -59,9 +60,10 @@ public class FlipFitGymCustomerClientMenu {
         if (validateUser(email, password)) {
             boolean isLoggedIn = true;
             System.out.println( "Customer Login Successful!!" );
+            System.out.println( "Welcome to FlipFit" );
             displayCurrentDate();
             while (isLoggedIn) {
-                System.out.println( "-------------CUSTOMER MENU-------------");
+                System.out.println( "!!CUSTOMER MENU!!");
                 System.out.println("Press 1 to view all gyms with slots");
                 System.out.println("Press 2 to book slot");
                 System.out.println("Press 3 to cancel slot");
@@ -325,6 +327,7 @@ public class FlipFitGymCustomerClientMenu {
         System.out.println( "Enter customer details: " );
         System.out.println( "Name: " );
         String ownerName = scanner.nextLine();
+
         System.out.println( "Phone Number: " );
         String phoneNo = scanner.nextLine();
         if (!validateIdentity.validatePhoneNumber(phoneNo)) {
